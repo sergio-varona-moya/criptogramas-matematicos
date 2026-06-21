@@ -64,5 +64,8 @@ def generar():
         return send_file(ruta_pdf, as_attachment=True, download_name="fichas_criptografia.pdf")
 
     except Exception as e:
+        import traceback
+        print("ERROR COMPLETO:")
+        print(traceback.format_exc())
         shutil.rmtree(directorio_trabajo, ignore_errors=True)
         return f"Error al generar el PDF: {str(e)}", 500

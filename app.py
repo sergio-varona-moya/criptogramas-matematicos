@@ -66,7 +66,7 @@ def generar():
                 pass
             return response
 
-        return send_file(ruta_pdf, as_attachment=True, download_name="fichas_criptografia.pdf")
+        return send_file(ruta_pdf, as_attachment=True, download_name="fichas_criptografia.pdf", mimetype="application/pdf")
 
     except Exception as e:
         import traceback

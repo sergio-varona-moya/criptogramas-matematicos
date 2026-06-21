@@ -26,6 +26,12 @@ def generar():
     archivo_datos = request.files.get("archivo_datos")
     archivo_elementos = request.files.get("archivo_elementos")
 
+    # Diagnóstico de codificación
+    with open(ruta_datos, 'rb') as f:
+        contenido = f.read()
+        print("Primeros bytes del archivo de datos:", contenido[:50])
+        print("Longitud:", len(contenido))
+
     if not archivo_datos or not archivo_elementos:
         return "Faltan archivos. Por favor, sube ambos archivos .txt.", 400
 

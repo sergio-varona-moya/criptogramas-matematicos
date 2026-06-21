@@ -3,12 +3,7 @@ FROM python:3.11-slim
 
 # Instalamos LaTeX (texlive-full tarda mucho; esta selección cubre lo que necesitas)
 RUN apt-get update && apt-get install -y \
-    texlive-latex-base \
-    texlive-latex-extra \
-    texlive-fonts-recommended \
-    texlive-fonts-extra \
-    texlive-lang-spanish \
-    texlive-science \
+    texlive-full \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

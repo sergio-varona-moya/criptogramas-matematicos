@@ -4,6 +4,7 @@ FROM python:3.11-slim
 # Instalamos LaTeX (texlive-full tarda mucho; esta selección cubre lo que necesitas)
 RUN apt-get update && apt-get install -y \
     texlive-full \
+    python3-pythontex \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

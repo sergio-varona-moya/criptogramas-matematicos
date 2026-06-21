@@ -150,7 +150,7 @@ def leeDatosCabecera(rutaArchivosCabecera):
 def creaArchivoLaTeX(datos, archivoElementos, directorioFichas):
     nombreArchivoElementos = archivoElementos[archivoElementos.rfind('/') + 1:-4]
     rutaArchivoLaTeX = directorioFichas + datos["Archivo"] + r"_" + nombreArchivoElementos + ".tex"
-    fLaTeX = open(rutaArchivoLaTeX, "w", encoding="utf8")
+    fLaTeX = open(rutaArchivoLaTeX, "w", encoding="latin-1")
     return rutaArchivoLaTeX, fLaTeX
 
 #######################################################################################

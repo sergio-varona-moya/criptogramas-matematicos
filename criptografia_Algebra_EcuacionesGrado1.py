@@ -506,7 +506,13 @@ def genera_pdf(ruta_datos, ruta_elementos, valorLetraA=-13, conDenominadores=0, 
     fLaTeX.write(r"\end{document}" + "\n")
     fLaTeX.close()
 
-    subprocess.run(["pdflatex", "--interaction=batchmode", "-output-directory=" + directorioFichas, rutaArchivoLaTeX])
+    #subprocess.run(["pdflatex", "--interaction=batchmode", "-output-directory=" + directorioFichas, rutaArchivoLaTeX])
+
+    resultado = subprocess.run(["pdflatex", "--interaction=nonstopmode", "-output-directory=" + directorioFichas, rutaArchivoLaTeX],capture_output=True,text=True)
+
+
+print("STDOUT pdflatex:", resultado.stdout[-3000:])
+print("STDERR pdflatex:", resultado.stderr[-1000:])
 
     end = time.time()
     print(len(elementos), "elementos procesados en", int(end - start), "segundos.")

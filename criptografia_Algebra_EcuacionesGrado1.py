@@ -508,6 +508,13 @@ def genera_pdf(ruta_datos, ruta_elementos, valorLetraA=-13, conDenominadores=0, 
 
     #subprocess.run(["pdflatex", "--interaction=batchmode", "-output-directory=" + directorioFichas, rutaArchivoLaTeX])
 
+    print("Ruta archivo LaTeX:", rutaArchivoLaTeX)
+    print("Existe el archivo:", os.path.exists(rutaArchivoLaTeX))
+    with open(rutaArchivoLaTeX, 'rb') as f:
+        contenido = f.read()
+        pos = 23527
+        print("Bytes alrededor de la posición del error:", contenido[pos-5:pos+5])
+    
     resultado = subprocess.run(["pdflatex", "--interaction=nonstopmode", "-output-directory=" + directorioFichas, rutaArchivoLaTeX],capture_output=True,cwd=os.path.dirname(os.path.abspath(__file__)))
     print("STDOUT pdflatex:", resultado.stdout.decode("latin-1"))
     print("STDERR pdflatex:", resultado.stderr.decode("latin-1"))

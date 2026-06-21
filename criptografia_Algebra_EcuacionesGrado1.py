@@ -515,7 +515,11 @@ def genera_pdf(ruta_datos, ruta_elementos, valorLetraA=-13, conDenominadores=0, 
         pos = 23527
         print("Bytes alrededor de la posición del error:", contenido[pos-5:pos+5])
     
-    resultado = subprocess.run(["pdflatex", "--interaction=nonstopmode", "-output-directory=" + directorioFichas, rutaArchivoLaTeX],capture_output=True,cwd=os.path.dirname(os.path.abspath(__file__)))
+    resultado = subprocess.run(
+        ["pdflatex", "--interaction=nonstopmode", "-output-directory=" + directorioFichas, rutaArchivoLaTeX],
+        capture_output=True,
+        cwd=os.path.dirname(os.path.abspath(__file__))
+    )
     print("STDOUT pdflatex:", resultado.stdout.decode("latin-1"))
     print("STDERR pdflatex:", resultado.stderr.decode("latin-1"))
 

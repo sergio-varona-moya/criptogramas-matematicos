@@ -65,7 +65,6 @@ def generar():
 
     except Exception as e:
         import traceback
-        print("ERROR COMPLETO:")
-        print(traceback.format_exc())
+        error_completo = traceback.format_exc()
         shutil.rmtree(directorio_trabajo, ignore_errors=True)
-        return f"Error al generar el PDF: {str(e)}", 500
+        return f"<pre>{error_completo}</pre>", 500

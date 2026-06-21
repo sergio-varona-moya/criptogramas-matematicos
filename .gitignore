@@ -1,0 +1,8 @@
+uploads/
+fichas/
+__pycache__/
+*.pyc
+*.pdf
+*.aux
+*.log
+*.out

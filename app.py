@@ -5,6 +5,7 @@ import uuid
 import shutil
 from flask import Flask, request, render_template, send_file, after_this_request
 from criptografia_Algebra_EcuacionesGrado1 import genera_pdf
+import resource
 
 app = Flask(__name__)
 
@@ -49,6 +50,8 @@ def generar():
         archivo_datos.save(ruta_datos)
         archivo_elementos.save(ruta_elementos)
 
+        
+        print("Memoria disponible antes de generar:", resource.getrlimit(resource.RLIMIT_AS))
         # Generamos el PDF
         ruta_pdf = genera_pdf(
             ruta_datos=ruta_datos,

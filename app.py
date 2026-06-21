@@ -22,20 +22,12 @@ def index():
 
 @app.route("/generar", methods=["POST"])
 def generar():
-    # Recibimos los archivos
     archivo_datos = request.files.get("archivo_datos")
     archivo_elementos = request.files.get("archivo_elementos")
-
-    # Diagnóstico de codificación
-    with open(ruta_datos, 'rb') as f:
-        contenido = f.read()
-        print("Primeros bytes del archivo de datos:", contenido[:50])
-        print("Longitud:", len(contenido))
 
     if not archivo_datos or not archivo_elementos:
         return "Faltan archivos. Por favor, sube ambos archivos .txt.", 400
 
-    # Recibimos los parámetros del formulario
     try:
         valorLetraA = int(request.form.get("valorLetraA", -13))
     except ValueError:
@@ -43,22 +35,16 @@ def generar():
 
     conDenominadores = int(request.form.get("conDenominadores", 0))
 
-    # Creamos un directorio temporal único para esta petición
-    # (evita conflictos si varios docentes generan a la vez)
     id_sesion = str(uuid.uuid4())
     directorio_trabajo = os.path.join(UPLOAD_FOLDER, id_sesion)
     os.makedirs(directorio_trabajo, exist_ok=True)
 
     try:
-        # Guardamos los archivos subidos
         ruta_datos = os.path.join(directorio_trabajo, "datos.txt")
         ruta_elementos = os.path.join(directorio_trabajo, "elementos.txt")
         archivo_datos.save(ruta_datos)
         archivo_elementos.save(ruta_elementos)
 
-        
-        print("Memoria disponible antes de generar:", resource.getrlimit(resource.RLIMIT_AS))
-        # Generamos el PDF
         ruta_pdf = genera_pdf(
             ruta_datos=ruta_datos,
             ruta_elementos=ruta_elementos,
@@ -67,7 +53,6 @@ def generar():
             directorio_trabajo=directorio_trabajo
         )
 
-        # Enviamos el PDF al navegador y limpiamos el directorio temporal después
         @after_this_request
         def limpia(response):
             try:
@@ -81,7 +66,3 @@ def generar():
     except Exception as e:
         shutil.rmtree(directorio_trabajo, ignore_errors=True)
         return f"Error al generar el PDF: {str(e)}", 500
-
-
-if __name__ == "__main__":
-    app.run(debug=False, host="0.0.0.0", port=5000)

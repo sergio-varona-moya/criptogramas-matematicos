@@ -20,5 +20,9 @@ RUN pip install --no-cache-dir flask numpy
 # Exponemos el puerto de Flask
 EXPOSE 5000
 
+ENV PYTHONIOENCODING=utf-8
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
+
 # Comando de arranque
 CMD ["python", "app.py"]

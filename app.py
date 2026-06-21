@@ -68,7 +68,7 @@ def generar():
 
         return send_file(ruta_pdf, as_attachment=True, download_name="fichas_criptografia.pdf", mimetype="application/pdf")
 
-    except Exception as e:
+    except BaseException as e:
         import traceback
         error_completo = traceback.format_exc()
         shutil.rmtree(directorio_trabajo, ignore_errors=True)

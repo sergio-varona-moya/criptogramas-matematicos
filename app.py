@@ -4,6 +4,9 @@ import os
 import uuid
 import shutil
 from flask import Flask, request, render_template, send_file, after_this_request
+import sys
+print("sys.getdefaultencoding():", sys.getdefaultencoding())
+print("sys.getfilesystemencoding():", sys.getfilesystemencoding())
 try:
     from criptografia_Algebra_EcuacionesGrado1 import genera_pdf
 except Exception as e:

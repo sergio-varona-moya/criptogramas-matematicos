@@ -73,7 +73,7 @@ def creaCodigoAlfabetico(valorLetraA):
 # CAMBIO: ahora recibe la ruta directamente como parámetro, en lugar de leerla de argv
 def leeElementos(rutaArchivoElementos):
     elementos = []
-    with open(rutaArchivoElementos, 'r', errors='replace', encoding="utf8") as fTxt:
+    with open(rutaArchivoElementos, 'r', errors='replace', encoding="latin-1") as fTxt:
         lines = fTxt.readlines()
         tema = lines[0]
         for linea in range(len(lines) - 1):
@@ -97,7 +97,7 @@ def leeDatosCabecera(rutaArchivosCabecera):
     Titulo = []
     Archivo = []
 
-    with open(rutaArchivosCabecera, 'r', errors='replace', encoding="utf8") as fTXT:
+    with open(rutaArchivosCabecera, 'r', errors='replace', encoding="latin-1") as fTXT:
         lines = fTXT.readlines()
         for linea in range(len(lines)):
             posicionComas = lines[linea].find(',')

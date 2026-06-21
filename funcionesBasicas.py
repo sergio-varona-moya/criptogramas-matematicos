@@ -3,6 +3,8 @@
 import random
 import math
 import subprocess
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 #######################################################################################
 def generaOperacionesDistintas(numeroTiposOperaciones, longitudElemento):
@@ -156,6 +158,9 @@ def escribePreambuloLaTeX(datos, fLaTeX):
     fLaTeX.write(r"\documentclass[14pt]{exam}" + "\n")
     fLaTeX.write(r"\RequirePackage{amssymb, amsfonts, amsmath, latexsym, verbatim, xspace}" + "\n")
     fLaTeX.write(r"\RequirePackage{tikz, pgflibraryplotmarks}" + "\n")
+    
+    fLaTeX.write(r"\graphicspath{{" + BASE_DIR.replace("\\", "/") + r"/imagenes/}}" + "\n")
+    
     fLaTeX.write(r"\usepackage[utf8]{inputenc}" + "\n")
     fLaTeX.write(r"\usepackage[T1]{fontenc}" + "\n")
     fLaTeX.write(r"\usepackage[a4paper,margin=1.25cm,top=1.25in,bottom=0.50in,headheight=1.20in,headsep=0.15in,footskip=0.15in]{geometry}" + "\n")
@@ -234,8 +239,8 @@ def escribePreambuloLaTeX(datos, fLaTeX):
     fLaTeX.write(r"\pagestyle{headandfoot}" + "\n")
     fLaTeX.write(r"\firstpagefooter{\footnotesize\textcolor{lightgray}{" + datos['Autor'] + r"}}{}{}" + "\n")
     fLaTeX.write(r"\runningfooter{\footnotesize\textcolor{lightgray}{" + datos['Autor'] + r"}}{}{}" + "\n")
-    fLaTeX.write(r"\firstpageheader{\includegraphics[height=0.75in]{./imagenes/logoCilniana_horizontal_5cm}}{ }{\large \textbf{\textcolor{darkgray}{Actividad criterial}} \\  \textbf{\textcolor{darkgray}{ " + datos['Nivel'] + r" " + datos['Materia'] + r"}}\\ \large \textcolor{darkgray}{ " + datos['Título'] + r"}}" + "\n")
-    fLaTeX.write(r"\runningheader{\includegraphics[height=0.75in]{./imagenes/logoCilniana_horizontal_5cm}}{ }{\large \textbf{\textcolor{darkgray}{Actividad criterial}} \\  \textbf{\textcolor{darkgray}{ " + datos['Nivel'] + r" " + datos['Materia'] + r"}}\\ \large \textcolor{darkgray}{ " + datos['Título'] + r"}}" + "\n")
+    fLaTeX.write(r"\firstpageheader{\includegraphics[height=0.75in]{logoCilniana_horizontal_5cm}}{ }{\large \textbf{\textcolor{darkgray}{Actividad criterial}} \\  \textbf{\textcolor{darkgray}{ " + datos['Nivel'] + r" " + datos['Materia'] + r"}}\\ \large \textcolor{darkgray}{ " + datos['Título'] + r"}}" + "\n")
+    fLaTeX.write(r"\runningheader{\includegraphics[height=0.75in]{logoCilniana_horizontal_5cm}}{ }{\large \textbf{\textcolor{darkgray}{Actividad criterial}} \\  \textbf{\textcolor{darkgray}{ " + datos['Nivel'] + r" " + datos['Materia'] + r"}}\\ \large \textcolor{darkgray}{ " + datos['Título'] + r"}}" + "\n")
     fLaTeX.write(r"" + "\n")
     fLaTeX.write(r"\renewcommand\thefootnote{\@fnsymbol\c@footnote}" + "\n")
     fLaTeX.write(r"\renewcommand\thefootnote{\alph{footnote}}" + "\n")
@@ -250,7 +255,7 @@ def escribeInicioFichaLaTeX(datos, tema, valorLetraA, fLaTeX):
     fLaTeX.write(r"\renewcommand{\arraystretch}{0.65}" + "\n")
     fLaTeX.write(r"\vspace{0.5\baselineskip}" + "\n")
     fLaTeX.write(r"" + "\n")
-    fLaTeX.write(r"\noindent\flushleft\includegraphics[height=0.35in]{./imagenes/ejercicio}\hspace{0.1cm}\raisebox{1.75ex}{\fcolorbox{grisActividad}{grisActividad}{\parbox{0.9365\textwidth}{\Large \textbf{\textcolor{black}{  " + datos['Título'] + r"}}\\ \scriptsize \textcolor{black}{" + datos['Subtítulo'] + r"}}}}}\vspace{0.25\baselineskip}" + "\n")
+    fLaTeX.write(r"\noindent\flushleft\includegraphics[height=0.35in]{ejercicio}\hspace{0.1cm}\raisebox{1.75ex}{\fcolorbox{grisActividad}{grisActividad}{\parbox{0.9365\textwidth}{\Large \textbf{\textcolor{black}{  " + datos['Título'] + r"}}\\ \scriptsize \textcolor{black}{" + datos['Subtítulo'] + r"}}}}}\vspace{0.25\baselineskip}" + "\n")
     fLaTeX.write(r"" + "\n")
     texto = datos["Saberes"]
     fLaTeX.write(r"\renewcommand{\arraystretch}{0.55} \raisebox{0.00ex}{\fcolorbox{black}{white}{\parbox{\textwidth - 5\fboxsep}{\notsotiny \setstretch{0.500} \textcolor{black}{  \textbf{Saberes básicos}\\ " + texto + r"}}}}\renewcommand{\arraystretch}{1.00}" + "\n")

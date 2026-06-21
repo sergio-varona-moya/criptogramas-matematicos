@@ -4,7 +4,12 @@ import os
 import uuid
 import shutil
 from flask import Flask, request, render_template, send_file, after_this_request
-from criptografia_Algebra_EcuacionesGrado1 import genera_pdf
+try:
+    from criptografia_Algebra_EcuacionesGrado1 import genera_pdf
+except Exception as e:
+    import traceback
+    print("ERROR EN IMPORTACIÓN:", traceback.format_exc())
+    raise
 import resource
 
 app = Flask(__name__)

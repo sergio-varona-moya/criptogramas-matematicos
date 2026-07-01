@@ -508,19 +508,16 @@ def genera_pdf(ruta_datos, ruta_elementos, valorLetraA=-13, conDenominadores=0, 
 
     # Cambiado por Claude
     resultado = None
-    for _ in range(2):  # dos pasadas para hyperref/lastpage
-        resultado = subprocess.run(["pdflatex", "--interaction=nonstopmode", "-output-directory=" + directorioFichas, rutaArchivoLaTeX],capture_output=True, text=True, encoding="utf-8", errors="replace")
+    for _ in range(2):
+        resultado = subprocess.run(["pdflatex", "--interaction=nonstopmode", "-output-directory=" + directorioFichas, rutaArchivoLaTeX],capture_output=True, text=True, encoding="utf-8", errors="replace"    )
 
-    if resultado.returncode != 0:
-        print("=== ERROR EN PDFLATEX ===")
-        print(resultado.stdout[-3000:])  # últimas líneas del log, donde suele estar el error
-        raise RuntimeError("pdflatex falló al compilar. Revisa el log en los logs del servidor.")
-    #
+    rutaPDF = rutaArchivoLaTeX[0:-4] + ".pdf"
 
-    end = time.time()
-    print(len(elementos), "elementos procesados en", int(end - start), "segundos.")
+    if not os.path.exists(rutaPDF):
+        print("=== ERROR EN PDFLATEX (no se generó el PDF) ===")
+        print(resultado.stdout[-3000:])
+        raise RuntimeError("pdflatex falló al compilar: no se generó el PDF. Revisa el log en los logs del servidor.")
 
     funcionesBasicas.limpiaArchivosAuxiliares(rutaArchivoLaTeX)
 
-    rutaPDF = rutaArchivoLaTeX[0:-4] + ".pdf"
     return rutaPDF

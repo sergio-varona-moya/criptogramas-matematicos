@@ -506,22 +506,16 @@ def genera_pdf(ruta_datos, ruta_elementos, valorLetraA=-13, conDenominadores=0, 
     fLaTeX.write(r"\end{document}" + "\n")
     fLaTeX.close()
 
-    #subprocess.run(["pdflatex", "--interaction=batchmode", "-output-directory=" + directorioFichas, rutaArchivoLaTeX])
+    # Cambiado por Claude
+    resultado = None
+    for _ in range(2):  # dos pasadas para hyperref/lastpage
+        resultado = subprocess.run(["pdflatex", "--interaction=nonstopmode", "-output-directory=" + directorioFichas, rutaArchivoLaTeX],capture_output=True, text=True)
 
-    print("Ruta archivo LaTeX:", rutaArchivoLaTeX)
-    print("Existe el archivo:", os.path.exists(rutaArchivoLaTeX))
-    with open(rutaArchivoLaTeX, 'rb') as f:
-        contenido = f.read()
-        pos = 23527
-        print("Bytes alrededor de la posición del error:", contenido[pos-5:pos+5])
-    
-    resultado = subprocess.run(
-        ["pdflatex", "--interaction=nonstopmode", "-output-directory=" + directorioFichas, rutaArchivoLaTeX],
-        capture_output=True,
-        cwd=os.path.dirname(os.path.abspath(__file__))
-    )
-    print("STDOUT pdflatex:", resultado.stdout.decode("latin-1"))
-    print("STDERR pdflatex:", resultado.stderr.decode("latin-1"))
+    if resultado.returncode != 0:
+        print("=== ERROR EN PDFLATEX ===")
+        print(resultado.stdout[-3000:])  # últimas líneas del log, donde suele estar el error
+        raise RuntimeError("pdflatex falló al compilar. Revisa el log en los logs del servidor.")
+    #
 
     end = time.time()
     print(len(elementos), "elementos procesados en", int(end - start), "segundos.")

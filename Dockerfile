@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     texlive-pictures \
     texlive-science \
     texlive-lang-spanish \
+    texlive-plain-generic \
     lmodern \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \

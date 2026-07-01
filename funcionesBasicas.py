@@ -255,7 +255,7 @@ def escribeInicioFichaLaTeX(datos, tema, valorLetraA, fLaTeX):
     fLaTeX.write(r"\renewcommand{\arraystretch}{0.65}" + "\n")
     fLaTeX.write(r"\vspace{0.5\baselineskip}" + "\n")
     fLaTeX.write(r"" + "\n")
-    fLaTeX.write(r"\noindent\flushleft\includegraphics[height=0.35in]{ejercicio}\hspace{0.1cm}\raisebox{1.75ex}{\fcolorbox{grisActividad}{grisActividad}{\parbox{0.9365\textwidth}{\Large \textbf{\textcolor{black}{  " + datos['Título'] + r"}}\\ \scriptsize \textcolor{black}{" + datos['Subtítulo'] + r"}}}}}\vspace{0.25\baselineskip}" + "\n")
+    fLaTeX.write(r"\noindent\flushleft\includegraphics[height=0.35in]{ejercicio}\hspace{0.1cm}\raisebox{1.75ex}{\fcolorbox{grisActividad}{grisActividad}{\parbox{0.9365\textwidth}{\Large \textbf{\textcolor{black}{  " + datos['Título'] + r"}}\\ \scriptsize \textcolor{black}{" + datos['Subtítulo'] + r"}}}}\vspace{0.25\baselineskip}" + "\n")
     fLaTeX.write(r"" + "\n")
     texto = datos["Saberes"]
     fLaTeX.write(r"\renewcommand{\arraystretch}{0.55} \raisebox{0.00ex}{\fcolorbox{black}{white}{\parbox{\textwidth - 5\fboxsep}{\notsotiny \setstretch{0.500} \textcolor{black}{  \textbf{Saberes básicos}\\ " + texto + r"}}}}\renewcommand{\arraystretch}{1.00}" + "\n")

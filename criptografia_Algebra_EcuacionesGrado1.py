@@ -509,7 +509,7 @@ def genera_pdf(ruta_datos, ruta_elementos, valorLetraA=-13, conDenominadores=0, 
     # Cambiado por Claude
     resultado = None
     for _ in range(2):  # dos pasadas para hyperref/lastpage
-        resultado = subprocess.run(["pdflatex", "--interaction=nonstopmode", "-output-directory=" + directorioFichas, rutaArchivoLaTeX],capture_output=True, text=True)
+        resultado = subprocess.run(["pdflatex", "--interaction=nonstopmode", "-output-directory=" + directorioFichas, rutaArchivoLaTeX],capture_output=True, text=True, encoding="utf-8", errors="replace")
 
     if resultado.returncode != 0:
         print("=== ERROR EN PDFLATEX ===")

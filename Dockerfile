@@ -1,26 +1,22 @@
-# Imagen base con Python 3.11
 FROM python:3.11-slim
 
-# Instalamos LaTeX (texlive-full tarda mucho; esta selección cubre lo que necesitas)
-RUN apt-get update && apt-get install -y \
-    texlive-full \
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    texlive-latex-base \
+    texlive-latex-recommended \
+    texlive-latex-extra \
+    texlive-fonts-extra \
+    texlive-pictures \
+    texlive-science \
+    texlive-lang-spanish \
+    lmodern \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Directorio de trabajo dentro del contenedor
 WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copiamos los archivos del proyecto
 COPY . .
 
-# Instalamos las dependencias de Python
-RUN pip install --no-cache-dir flask numpy
-
-# Exponemos el puerto de Flask
-ENV PYTHONIOENCODING=utf-8
-ENV LANG=C.UTF-8
-ENV LC_ALL=C.UTF-8
-
-EXPOSE 5000
-# Comando de arranque
-CMD ["python", "app.py"]
+EXPOSE 10000
+CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:10000", "app:app"]

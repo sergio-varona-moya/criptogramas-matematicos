@@ -294,7 +294,6 @@ def escribeInicioFichaLaTeX(datos, tema, valorLetraA, fLaTeX):
     fLaTeX.write(r"	\end{footnotesize}" + "\n")
     fLaTeX.write(r"\end{center}" + "\n")
     fLaTeX.write(r"" + "\n")
-    fLaTeX.write(r"olakase" + "\n")
     fLaTeX.write(r"\vspace{1\baselineskip}" + "\n")
 
 #######################################################################################

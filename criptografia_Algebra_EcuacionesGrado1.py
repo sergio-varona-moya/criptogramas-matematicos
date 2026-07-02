@@ -463,7 +463,8 @@ def genera_pdf(ruta_datos, ruta_elementos, valorLetraA=-13, conDenominadores=0, 
     for koko in range(len(elementos)):
         funcionesBasicas.escribeInicioFichaLaTeX(datos, tema, valorLetraA, fLaTeX)
         fLaTeX.write(r"\begin{small} Para desencriptarlo, tendrás que resolver las siguientes ecuaciones lineales, buscar su solución en la tabla y anotar la letra correspondiente. \textbf{Si es una identidad o una ecuación sin solución}, anota un espacio en blanco.\end{small}" + "\n")
-        fLaTeX.write(r"\vspace{0.15\baselineskip}" + "\n")
+        fLaTeX.write(r"" + "\n")
+        fLaTeX.write(r"\vspace{1\baselineskip}" + "\n")
         fLaTeX.write(r"\renewcommand{\arraystretch}{2.0}" + "\n")
         fLaTeX.write(r"\begin{footnotesize}" + "\n")
         fLaTeX.write(r"\noindent\begin{tabularx}{\textwidth}{|X|c|c|}" + "\n")
